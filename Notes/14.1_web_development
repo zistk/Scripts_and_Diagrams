@@ -1,0 +1,207 @@
+14.1 day 1 web development
+07/09/2020
+-----------------------------------------------
+- the web: a security perspective
+    - the web is an attack surface
+- Understanding the web: HTTP Requests ans responses
+    - cliaent server architecture
+    - web client <-> weberver <-> webserver
+- HTTP 
+    - layer 7: Application layer
+    - http is used to transfer web pages
+    - Hyper Text Transfer Protocol
+    1. User requests data from a server
+    2. user gives data to a server
+    3. ????
+- HTTP Method
+    - GET
+        - requests data from a server
+    - POST
+        - sends data to a source, often changing or updating a server
+    - PUT
+        - replaces current data to a new value
+    - DELETE
+    - CONNECT
+    - OPTIONS
+        - asks for http options allowed
+
+-------------------------------------------------
+*small DEMO*
+-> nc example.com 80
+-> GET/HTTP/1.1     <- Request line
+-> host: example.com    <- host body
+-> connection: keep alive   <- keeps connection alive (part of host body)
+                    
+- this wil give you information about the responce you got out of the GET requests
+-Headers
+    - authorization
+        - saves credentials to get you into a server
+    - Referrer
+        - ????
+    - Cookie
+        - cookies something that sits on your machine
+        - is a token from server to identify you and keeps track you you while you use server 
+
+- Can pass rewuest using URL and request peramiters GET request Headers
+- POST request preramiters in the request body more for secure sending of information
+- have a whitespace between headers and response
+- 200 codes indicate success
+- 300 
+- 400
+- 500
+-----------------------------------
+*Activity*
+Q1
+Answer: OPTIONS request was used to probe the site
+Analysis: yes because it show that the site can take POST requests and the attacker would know the potential blindspots
+Q2
+Answer:- 401 unautherized
+        - POST request was used to generate the HTTP response
+        - the information in the body was an attempted login information
+Analysis: the attacker in this question seemed line they tried to gain accesss to an accaount via POST request
+Q3
+Answer:- PUT request
+        - cookie steeler was downloaded onto the site with PUT 
+Analysis: Was a put request to update or created a file with the path to file containing a script to steal cookies
+201:created <- created with a PUT request 
+Q4
+used cookie gatherd to gain access to an admin account using a get request
+
+
+-----------------------------------------
+reading request and responce Headers 
+
+- Understanding
+- identify
+- respond
+
+------------------------------------------
+*Activity 2* didnt finish
+wget tinyurl.com/14-1--setup-script && sudo chmod +x 14-1--setup-script && sudo ./14-1--setup-script
+------------------------------------
+-curl
+    - command line tool
+    - headless search tool
+    
+
+**Demo**     Posthere.io will show post requests 
+- on linux
+-> curl https://posthere.io
+# this will just do a GET request
+-> curl --head https://posthere.io 
+# will show headers of the requested site
+-> curl -X POST http://posthere.io/abed-4170-a0cd
+#will show the post rewuest to the site
+curl -X POST -d "query=peramiter" <Link to the site you want to curl>
+- "java is the langage of the web" - ethan farmer instructor
+-> curl -X POST -d "{\"name\"\value\"}" -H contenttype
+# -X controles request type -d will allow the data that will be passed through the wire -H will have you make a Header to pass the request
+# a '-I' will show the headers
+
+
+
+***example***
+# This is a curl command specifying a POST request sending data specifying a Header with -H
+curl -X POST -d '{"name":"joe"}' -H "Content-type: appication/json" https://httpbin.org/anything
+{
+  "args": {}, 
+  "data": "{\"name\":\"joe\"}", 
+  "files": {}, 
+  "form": {}, 
+  "headers": {
+    "Accept": "*/*", 
+    "Content-Length": "14", 
+    "Content-Type": "appication/json", 
+    "Host": "httpbin.org", 
+    "User-Agent": "curl/7.58.0", 
+    "X-Amzn-Trace-Id": "Root=1-5f07d3d7-0c519684441e5a40982bbca0"
+  }, 
+  "json": {
+    "name": "joe"
+  }, 
+  "method": "POST", 
+  "origin": "67.2.211.31", 
+  "url": "https://httpbin.org/anything"
+}
+***
+- cookies
+    - HTTP is stateless meaning your session cannot be distinguished from other sessions
+    - thats why we use cookies
+    - small pieces of text data that, when sent by an Http request will lidentify you
+    - default websites will give users with cookies to habe a personalized page
+    - EX*** amazon shopping will show you your stuff
+    - a session is like a shopping cart empty then you fill it with things and you can just leave it or check out
+- implimentation of cookies 
+    - an attacker can change thie cookies to be diffrent when they make a request to pose as bob using his cookie 
+---------------------------------------------------------
+got to class late
+
+lab setup script
+sudo wget tinyurl.com/14-2--setup && sudo chmod +x 14-2--setup && sudo ./14-2--setup
+- JSON format basics {;} 
+- [ ] <- an array
+-> trivy --format json --severity MEDIUM --output results.json 
+-> jq '.[0] results.json # the data returned grab the first value
+-> jq '.[0].Type.Vuneribilities' results.json
+-> jq '.[1].Type' results.json
+#allows us to search though the results of the first script in the results.json results
+-> jq '.[0].VUlneribilities |keys' results.json
+-> jq '.[0].Vulneribilities | select(.Description |test ("Man-in-the-Middle))' results.json 
+
+
+*activity 3*
+-> trivy --format json --output wp_all_vulns.json --severity HIGH wordpress:4.6.1
+-> jq '.[0].Vulnerabilities[] | select(.Description | test("buffer overflow"))' wp_all_vulns.json > wp_Buff_vulns.json
+
+
+
+---------------------------------------
+Container runtime IDS
+Intrusion Detection system = IDS
+- host based IDS
+- Network based IDS
+- container based IDS
+    - even though we make a scan we cant fully secure
+      our container 
+
+- Falco
+
+
+----------------------------------------
+Homework:
+need to make a GitHub reposipository
+Linux weeks: 4-6
+Windows weeks: 7-14 ## remember that windows spesific
+was week 7 but we used azure and windows 
+Vms quite a lot.
+
+
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

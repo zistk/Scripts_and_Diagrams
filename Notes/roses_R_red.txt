@@ -1,0 +1,64 @@
+roses are red violets are blue
+caesar would be 8 is your first clue
+
+Decrypt: ozcjmz
+Type: caesar cypher
+shift: 8
+decypted: gruber
+Key:  6skd8s
+
+---------------
+    riddle 2
+---------------
+Message:01000111 01100101 01101110
+        01101110 01100101 01110010
+        01101111 
+
+Decoded:Gennero
+Key: cy8snd2
+
+---------------
+    riddle 3
+---------------
+Cypher: 4qMOIvwEGXzvkMvRE2bNbg==
+Riddle_Key: 5284A3B154D99487D9D8D8508461A478C7BEB67081A64AD9A15147906E8E8564
+IV:  1907C5E255F7FC9A6B47B0E789847AED
+
+key: ud6s98n
+
+command i used for openssl:
+openssl enc -in cyphertext.txt.enc -out new_1.txt -d -a -K 5284A3B154D99487D9D8D8508461A478C7BEB67081A64AD9A15147906E8E8564 -iv 1907C5E255F7FC9A6B47B0E789847AED -nosalt -pbkdf2 -aes-256-cbc
+
+
+
+-------------------
+    riddle 4
+-------------------
+#a series of multipule choice questions
+ Key: 7gsn3nd2`
+
+
+
+
+
+ -------------
+ riddle 5
+ -------------
+md5 hash:3b75cdd826a16f5bba0076690f644dc7
+
+Key: ajy39d2
+
+
+
+-----------
+riddle 6
+-----------
+use steghide command to help find the diffrence in the image
+run steghide -sf mary-lamb.jpg
+password: ABC 
+code: mcclane
+( )
+key: 7skahd6
+
+
+

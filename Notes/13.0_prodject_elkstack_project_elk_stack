@@ -1,0 +1,220 @@
+13.0 prodject elk stack
+
+3 deliverables
+
+- Network diagream (draw.io)
+    -Architectire of your network
+- Technical Brief
+    - Answers to a series of questions explaining the important feachers of the suite, completed after the stack
+- GitHub Repository
+
+ELK= Elasticsearch + Logstash + Kibana
+- ELK started with Elasticsearch
+- logstash also processes logs before saving them.
+- kibana helps visualize data
+
+- theproject is on our personal azure account
+
+
+
+
+
+
+-----------------------------------------------------
+- choose a diffrent reagin
+- needs 4 GB of ram
+- no avalibility zones
+- add elk stack to the ansible container and a new playbook
+
+
+-----------------------------------------------------
+*Activity 1* 
+- my new region (US) West US 2
+- Name of the ew network: ElkStack_Network
+- Name of first VM: ElkNet
+
+- Added my new ElkNet VM to the /etc/ansible/hosts
+- make sure when you edit the hosts file seperate the hosts
+    [Elk]
+  > 10.1.0.4 (then the python thing)
+-nano /etc/ansible/install-Elk.yml
+---
+        >> - name: Config elk 
+        >>   hosts: Elk
+        >>   become: true
+        >>   tasks:
+        >>    - name: docker.io
+        >>      apt: 
+        >>        update_cache: yes 
+        >>        name: docker.io
+        >>        state: present
+        >>    - name: Install pip
+        >>      apt:
+        >>         name: python3-pip
+        >>         state: present 
+        >>    - name: Use more memory
+        >>      sysctl:
+        >>        name: vm.max_map_count
+        >>        value: '262144'
+        >>        state: present
+        >>        reload: yes
+        >>    - name: Install Docker python module
+        >>      pip:
+        >>        name: docker
+        >>        state: present 
+        >>    - name: download and launch elk container 
+        >>      docker_container:
+        >>        name: elk 
+        >>        image: sebp/elk
+        >>        state: started
+        >>        restart_policy: always
+        >>        published_ports: 
+        >>         - 5601:5601
+        >>          - 9200:9200
+        >>          - 5044:5044
+        >>    - name: Enable docker service
+        >>      systemd:
+        >>          name: docker 
+        >>          enabled: yes
+- then run ansible-playbook /etc/ansible/install-Elk.yml
+
+- make a new inbound security rule
+    1. on port 5601
+    2. protocol = any
+    3. source = <my ip>
+    4. destination = Virtual network
+
+    then in the search bar
+    http://<the VM's ip>:5601/app/kibana **refer to your instructer on the correct URL**
+    
+-------------------------------------------------------------------------
+
+07/2/2020 elk stack day 2
+
+- The Beats Family
+    - ELK stack works my storing log data in Elasticsearch with the Logstash
+    
+    - FileBeat
+        - hadles uploading changes to files
+        - agent software on important machines to log things (both metric and file beats)
+        - must be installed on the vm's you wish to moniter
+    - MetricBeat
+
+
+
+files receving are visn 7.4
+
+------------------------------
+Demo
+in jump box
+    1.start and attach to container with ansible 
+    2.once there ssh into Elk stack Vm 
+    3.do >sudo docker ps 
+    4.sudo docker stop elk
+    5. sudo docker rm elk 
+    6. back on ansible container
+    7. nano /etc/ansible/install-elk.yml
+    8. replace on download and launch elk container image: sebp/elk w/ sebp/elk:740
+    9.save and exit then rerun ansible-platbook /etc/ansible/intall-elk.yml
+    
+    10.new yml
+** in ansible container /etc/ansible
+>> ---
+>> - name: Install File beat and MetricBeat
+>>   hosts: webservers
+>>   become: yes
+>>   tasks: 
+>>   - name: Download Filebeat package
+>>     command:curl -L -o <link> .deb
+>>   - name: Install filebeat package
+>>     command: dpkg -i filebeat-7.4.0-amd64.deb
+>>   - name: Copy overfilebeat configuration
+>>     copy:
+>>       src: /etc/ansible/files/filebeat-config.yml
+>>       dest: /etc/filebeat/filebeat.yml
+>>       mode: '0644'
+>>   - name: Enable and Configure system module
+>>     command: filebeat modules enable system  
+>>   - name: Setup filebeat
+>>     command: filebeat setup
+>>   - name: Start filebeat service
+>>     command: service filebeat start
+
+then save
+/etc/ansible-> ansible-playbook /etc/ansible/filebeat-playbook.yml
+
+
+
+11. curl file > /etc/ansible/files/filebeat-config.yml
+12. change Hosts to 10.1.0.4 in two places
+
+13. follow all the same steps for metricbeat to install that
+
+
+----------------------------------------------
+Day 3 create a git reposiory that is public
+
+Create a network diagram and Documentation
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Homework Help commands
+- Make a README.md 
+- make a clone of the repository
+- then run -> git clone <clone from HUB>
+    #commands
+    -> git status
+    -> git diff # to see what has been changed
+    -> git add README.md
+    -> git commit -m "this is the first commit"
+    -> git log #show history of states like the status command
+    # nothing is on the hub repository we've make and edited the clone
+    -> git pull # pulls the current HUB repository
+    -> git push # pushes the clone into the Hub repository 
+    
+
+
+- modify it 
+all in the ~/school/schoo_sub/ELKstack_repo_Hw
+to do list: create the read me with the corect diagrams and images
+            updated diagram
+            add the YML files
+
+
+
+
+
+
+52.247.204.112
+10.1.0.4
+
+
+HW continued
+- get screenshots of:
+    - Vm's
+    - ansible containers
+    - YML files
+    - config files
+    - docker ps output
+    - the ELK server url and the Kibana page 
+    
+
+
+

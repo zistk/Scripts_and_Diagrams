@@ -1,0 +1,201 @@
+HW 9
+
+nslookup starwars.com
+Name:    starwars.com
+Addresses:  2001:428:3801:207::4508:c96a
+          2001:428:3801:207::4508:c954
+          69.8.201.106
+          69.8.201.84
+
+nslookup -type=SOA starwars.com
+starwars.com
+        primary name server = a9-66.akam.net
+        responsible mail addr = postmaster.lucasfilm.com
+        serial  = 2019031407
+        refresh = 300 (5 mins)
+        retry   = 300 (5 mins)
+        expire  = 604800 (7 days)
+        default TTL = 300 (5 mins)
+
+nslookup postmaster.lucasfilm.com
+*** modem.Home can't find postmaster.lucasfilm.com: Non-existent domain
+
+
+nslookup a9-66.akam.net
+Non-authoritative answer:
+Name:    a9-66.akam.net
+Addresses:  2a02:26f0:117::42
+          184.85.248.66
+
+Pinging a9-66.akam.net [184.85.248.66] with 32 bytes of data:
+Reply from 184.85.248.66: bytes=32 time=41ms TTL=59
+Reply from 184.85.248.66: bytes=32 time=25ms TTL=59
+
+
+Mission 2
+nslookup thefoce.net
+
+Name:    theforce.net
+Address:  104.156.250.80
+
+nslookup -type=SOA theforce.net
+	primary name server = WebPublish_Othe
+        responsible mail addr = hostmaster
+
+nslookup -type=txt theforce.net
+
+	theforce.net    text =
+
+        "v=spf1 a mx mx:smtp.secureserver.net include:aspmx.googlemail.com ip4:104.156.250.80 ip4:45.63.15.159 ip4:45.63.4.215"
+theforce.net    text =
+
+        "google-site-verification=ycgY7mtk2oUZMagcffhFL_Qaf8Lc9tMRkZZSuig0d6w"
+theforce.net    text =
+
+        "google-site-verification=XTU_We07Cux-6WCSOItl0c_WS29hzo92jPE341ckbOQ"
+
+nslookup hostmaster
+Name:    hostmaster.Home
+Addresses:  198.105.244.23
+          198.105.254.23
+
+ping 45.23.176.21
+Pinging 45.23.176.21 with 32 bytes of data:
+Request timed out.
+Request timed out.
+Request timed out.
+Request timed out.
+
+
+mission 3
+
+nslookup -type=CNAME www.theforce.net
+
+Non-authoritative answer:
+www.theforce.net        canonical name = theforce.net
+
+ping theforce.net
+
+Pinging theforce.net [104.156.250.80] with 32 bytes of data:
+Reply from 104.156.250.80: bytes=32 time=62ms TTL=117
+Reply from 104.156.250.80: bytes=32 time=63ms TTL=117
+Reply from 104.156.250.80: bytes=32 time=62ms TTL=117
+Reply from 104.156.250.80: bytes=32 time=63ms TTL=117
+
+nslookup -type=CNAME resistance.theforce.net
+Server:  modem.Home
+Address:  192.168.0.1
+
+*** modem.Home can't find resistence.theforce.net: Non-existent domain
+
+
+
+Mission 4
+
+nslookup princessleia.site
+
+
+Name:    princessleia.site
+Address:  184.168.221.58
+
+nslookup -type=soa princessleia.site
+
+Non-authoritative answer:
+princessleia.site
+        primary name server = ns25.domaincontrol.com
+        responsible mail addr = dns.jomax.net
+        serial  = 2020042100
+        refresh = 28800 (8 hours)
+        retry   = 7200 (2 hours)
+        expire  = 604800 (7 days)
+        default TTL = 600 (10 mins)
+
+ping ns25.domaincontrol.com
+
+Pinging ns25.domaincontrol.com [97.74.102.13] with 32 bytes of data:
+Reply from 97.74.102.13: bytes=32 time=38ms TTL=56
+Reply from 97.74.102.13: bytes=32 time=39ms TTL=56
+Reply from 97.74.102.13: bytes=32 time=43ms TTL=56
+Reply from 97.74.102.13: bytes=32 time=38ms TTL=56
+
+ping ans01.domaincontrol.com
+
+Pinging ans01.domaincontrol.com [97.74.97.35] with 32 bytes of data:
+Reply from 97.74.97.35: bytes=32 time=42ms TTL=55
+Reply from 97.74.97.35: bytes=32 time=43ms TTL=55
+
+nslookup -type=mx ans01.domaincontrol.com
+
+domaincontrol.com
+        primary name server = ans01.domaincontrol.com
+        responsible mail addr = dns.jomax.net
+        serial  = 2020011300
+        refresh = 3600 (1 hour)
+        retry   = 7200 (2 hours)
+        expire  = 604800 (7 days)
+        default TTL = 3600 (1 hour)
+
+Batuu, D, O, R, V, Jedha = 28
+Batuu, D, C, E, F, J, I, M, L, Q, T, V, jedah = 26
+
+
+
+WPA key (1 of 4)
+
+   01 57 9b fb a6 d1 5d 24 e1 db ed 0f 45 c2 62 09  
+   27 fa 0f 62 df 66 c7 9b 17 00 14 14 ad 08 54 9c  
+  0f
+
+WPA key (2 of 4)
+
+ e8 df a1 6b 87 69 95 7d 82 49 a4 ec 68 d2 b7   
+  64 1d 37 82 16 2e f0 dc 37 b0 14 cc 48 34 3e 8d   
+   d6
+
+WPA key (3 of 4)
+
+ 57 9b fb a6 d1 5d 24 e1 db ed 0f 45 c2 62 09   
+   27 fa 0f 62 df 66 c7 9b 17 00 14 14 ad 08 54 9c   
+  0f 
+
+WPA key (4 of 4)
+    00 00 00 00 00 00 00 00 00 00 00 00 00 00 00   
+  00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00   
+   00
+
+Whole key
+   01 57 9b fb a6 d1 5d 24 e1 db ed 0f 45 c2 62 09  
+   27 fa 0f 62 df 66 c7 9b 17 00 14 14 ad 08 54 9c  
+  0f e8 df a1 6b 87 69 95 7d 82 49 a4 ec 68 d2 b7   
+  64 1d 37 82 16 2e f0 dc 37 b0 14 cc 48 34 3e 8d   
+   d6  57 9b fb a6 d1 5d 24 e1 db ed 0f 45 c2 62 09   
+   27 fa 0f 62 df 66 c7 9b 17 00 14 14 ad 08 54 9c   
+  0f   00 00 00 00 00 00 00 00 00 00 00 00 00 00 00   
+  00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00   
+   00   
+
+
+         
+
+                                        
+KEY FOUND! [ dictionary ]
+
+172.16.0.1
+
+
+
+mission 7
+nslookup -type=txt princessleia.site
+
+Non-authoritative answer:
+princessleia.site       text =
+
+        "Run the following in a command line: telnet towel.blinkenlights.nl or as a backup access in a browser: www.asciimation.co.nz"
+
+
+
+
+
+
+
+

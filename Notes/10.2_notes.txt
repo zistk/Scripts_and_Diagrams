@@ -1,0 +1,181 @@
+Cryptography 10.2 notes
+Cypher-is the type of encryption
+Cypher text - the scrambled data of a word or series of words
+
+
+Activity 1
+openssl enc -in message.txt -out message.txt.enc -nosalt -base64 -aes-256-cbc -k
+
+openssl enc -d -in message.txt.enc -out new.txt -k <encryption> -iv <iv-encryption> -nosalt -pbkdf2
+
+
+lessons
+
+-secure key exchange
+	-a key must be created for every interaction
+	-this creates a disadvantege
+
+-number of keys
+-formula (N*(N-1))/2
+	-symetric encryption
+*(N)=Number of people
+
+-asemetric
+-private key
+	-kept secret and can affect confidentialitty if message is exposed
+	-used to decypt messages from others using your public key
+-public key 
+	-acessable to all
+	-used to allow others to encrypt messages
+-RSA
+	-algorithm called rsa is used in asymetric encryption
+	-named aget the last name of the creators
+formula N*2
+
+GPG 
+-GNU Privacy Gaurd
+-asymetrical encryption tool on linux
+->gpg --gen-key
+->gpg --armor --output instructot.gpg --export ethan@gxample.com
+-importing public key
+->gpg --armor --import kevin.gpg
+->gpg --list-keys #lists all the public keys to others that you may want to message
+->gpg --armor --import dillon.gpg
+->gpg --armor --output ciphertext.txt --encrypt --recipent keven@icloud.com
+->gpg --output message.txt --decypt message.enc
+
+
+
+Hashes
+-diffrent from encryption
+-ususally used to hide passwords
+-its a one way function and you cant get back something that is hashed without doing the work
+-encyption is about privacy
+-hashes are about integrety
+-SHA 1/2
+
+
+digital signatures
+-used to varify a user and the authenticity of the message
+
+
+
+activity 3
+#on ubuntu linux
+->echo "this is realy from me " > message.txt
+->gpg -output signature --armor --detach-sig message.txt
+->cat signature
+#has signature
+#other person
+-> gpg --verify signature message.txt
+
+
+
+recap
+provides signiture with message
+->gpg --output message.sig --clearsign message.txt
+#to check if it hadent been chaged
+->gpg --varify message.sig
+->gpg --output message_signed.txt --clearsign message.txt
+gpg --varify trevs
+
+10.3
+-symetric encription
+--bitlocker on windows
+--filevault on mac
+-email
+--email usually dosnt have encryption
+-ssl
+ -otherwise known as TLS
+  -negosiates an encrypted channel 
+#shows the image
+->eog family.jpg 
+->echo "this secret message" > message.txt
+->steghide embed --cf family.jpg -ef message.txt
+#checks diffrences
+#if you have two coppies of the same image
+->diff family.jpeg family_1.jpeg
+#extracts data
+-steghide extract -sf family.jpeg
+
+activity 1 today
+eog mydreamcar.jpg
+#extracting message
+->steghide extract -sf mydreamcar.jpg
+#password: delorian
+#if you cant run "eog" on the picture then you might not be able too
+
+SSL/TLS cretificates
+-under the lock near your browser
+-certificate athority
+ -places that generate certs 
+-certificate signing request 
+-chain of trust
+ -root cets authoritys
+ -lists of CA's that your browser to trust
+
+
+- cryptographic methods
+  - statistical attacks
+   - if the nuber generated is infact predictable and not random, a hacker can determine the nuber and the access of unautherized words
+  - brute force attack
+   - a way of continuing to try passwords
+   - lockout features can limit the ammount of tries
+ - Birthday attacks
+   - exploit the probability that two separate plaintexts that use the same hash algorithm will produce the same ciphertext(also knwn as collision and hashing collision)
+   - stronger hash algorithms limit the possibilities of a repeat
+ - frequency analysis
+  - tries to crack the most frequently used letters in cyphertext
+ - replay attack
+  - intercepts a key or signal to replicate it to use it again
+
+
+->echo a >rainbox
+->echo a |md5sum >> rainbox
+->echo bb >> rainbox
+->echo bb | md5sum >> rainbox
+#this rainbowtable (rainbox) will be filled with all the hashed versions of whatever i wanted
+#this one will be an md5sum rainbowtable
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

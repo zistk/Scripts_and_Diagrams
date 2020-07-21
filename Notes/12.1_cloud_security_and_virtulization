@@ -1,0 +1,336 @@
+12.1 cloud security and virtulization 
+
+cloud architect 
+cloud security
+DevOpsSec
+
+1. ground up security
+2. easy configuation
+3. quick turn around
+4. peronalized provisions fromcloud providers
+5. high avalibility and fault tolerance
+6. easy implimentaton
+7. affordability
+
+Modles of cloud service
+- IaaS
+    - infastructure as a service
+    - Highly availablility
+- PaaS
+    - Platform as a service
+- SaaS
+    - Software as a service
+- Daas/DBaas
+    - Database as a service
+- Caas
+    - communication as a service
+
+we created a resorce group
+now we are gonna make a virtual network
+1. type in virtual network
+2. create virtual network
+3. select red team
+4. name it red team network
+5. no firewall we will make our own
+6. leave defaults in IP
+
+security groups like vrtual fire wall
+- one Highly secure machine that lets you access you other machines
+
+1. search network security group
+2. create network security group
+3. name Red Team SG
+4. after creation process
+
+-----------------------------
+hardware components
+-RAM (Random access memory)
+-Storage (HDD/SSD)
+-Disks
+-CPU (Central prcessing unit)
+-all of theses are necissary to build a computer and you need these for virtual machines
+
+12:07
+- Search Virual machines
+1. crate new virtual machine
+2. Name Jump-Box-Provisioner
+3. Avilability optins No infrastructure
+4. Image Ubuntu server 18.04
+5. size Standard_B1s - 1 vcpu, 1 Gib memory
+6. no password
+7. username RedTeam something
+8. ssh-keygen - t rsa key pair
+9. no password
+10.inbound port rules allow 22
+
+username: RedTeam_admin
+------------------------------
+web VM's
+
+-click add under virtual machine
+1. name web-01
+2. RedTeamVS
+3. B1ms
+-------------------------------
+1. network security groups
+2. add inbound security rules
+3. source any
+
+
+----------------------------
+----------------------------
+12.3 06/23/20 day 2
+
+-Virtual machines
+    - Most virtual machines have virtual versions of computer parts to give you a virtual computer
+
+-Containers
+    -containers are smaller then VM's megebytes rather then gigabytes
+      - being smaller allows them to be downloaded much easier then other options
+      - like a smaller virtual machine that donsn't need to make virtual computer parts
+    -light weight VM's 
+    -containers are stateful
+        
+-Provisioner
+    - tools that automaticly configues containers
+-Infastructure as Code (IaC)
+    - writes code to document the infastructure
+    - primary benifit to IaC is everyone can see how the network or containers, etc. are set up
+
+-Continuous Integration/Continuous Deployment (CI/CD)
+    - the concept of automaticlly updating machines on your network whenever your IaC files change
+    -CI ensures that a new virsion of that machine is built immediatly
+
+-secure configuation
+    - an individual VM or network is protected form intrusion using well-considerd rules , such as access control policies and firewall rules
+-secure architecture
+    - can effectivly midigate allout on branch
+
+-Network redundency
+    - fault tolerant system 
+        - can keep running even if one or more components systems firewall
+        - these systems continue to run because of redundency: creating duplicut components or systems.
+
+**Activity 1
+1. Pros 
+    -its simple and easy to maintain
+    - its not too costly with only one gateway server
+   Cons 
+    - if a breach occures on the gateway every viretual network server could be vaulnerable
+    - ^ same thing as the one above along with fault tolorence that gate way cannot have a fault because the damage that could be done could be more costly then the others
+
+2. pros 
+    - this one has two servers in this gateway makeing it inharently more secure then the other servers
+    - this makes it more redundent in the gateway
+   cons
+    - double the cost and now we have to maintain two servers
+----------------------------------------
+- Jump Box
+    - fanning in
+        - like a japaneese fan the center point of all the fannded out servers
+        - the jump box is exposed to the public internet. in the classroom we will be able to connect to the tcp port (22)
+
+-VPN = vitual privte network
+    - encryps all traffic in a "tunnl" under the network you are on
+
+**Activity 2
+1. type in network security groups
+2. make an inbound security rules, click add
+3. source IP adress/CIDR ranges = mine 
+4. port ranges 22 Preotocol tcp
+-----------------------------------
+- Scailing
+    -virtical Scailing
+        - increase size of instance (RAM,CPU,etc)
+        - has a limit (cause of hardware)
+    - Horizontal Scailing
+        -increase ammount of instances (like more computers)
+
+- Docker
+    -can use Docker to distribute software, as an alternative source
+
+-Command Notes
+-> sudo apt install docker.io 
+-> sudo apt-get update 
+-> systmctl status docker 
+-> systemctl enable docker; ststemctl start docker
+-> sudo docker image 
+-> sudo docke image ls #looks at all images 
+-> sudo docker image pull cyberxsecurity/ansible #creates copy of image
+-> sudo docker run -it cyberxsecurity/ansible:latest bash #-it= interactive terminal
+-> uname -a 
+->exit
+
+-> sudo docker ps #shows all containers
+-> sudo docker ps -a  #shows all even the ones that you stopped
+-> sudo docker start (name that you get from ps -a)
+-> sudo docker atach (name you get from ps -a)
+
+
+- Activity 3
+-> sudo docker ps -a
+-> sudo docker attach (name get from PS -a)
+# at this point you are in a containers
+-> ssh-keygen
+-> ls .ssh
+-> cat ~/.ssh/id_rsa.pub 
+# out of containers
+->sudo docker start (name thing)
+->sudo docker attach (name thing)
+
+-> nano ansible.hosts
+#next too the Webservers (ansble_python interpreter=/usr/bin/python3)
+-> ansible -m ping webservers
+-> ansible -m ping all 
+
+
+
+-on azure portal
+    -find right usernames on the Web_* virtual machines
+- reset password on both the wb servers
+    -copy public key for containers for both
+
+
+
+
+
+------------------------------------------------
+go too network security groups 
+1. add new rule 
+set on port 22
+2. priority behind the ssh we set up
+
+
+web_1 : 10.0.0.5
+web_2 : 10.0.0.8
+
+52.240.53.128
+
+------------------------------------
+
+12.4 day 3 06/25/2020
+
+-docker review
+    - docker is like a light weight VM (containers)
+    -> sudo docker run
+    # starts a new container
+    -> sudo docker ps -a
+    # shows all docker containers that you have started
+    -> sudo docker run -it alpine bash
+    -> sudo docker run -it alpine /bin/sh 
+    -> sudo docker run -it alpine bin/bash 
+    # alpine is a linux image on docker
+    # starts conainers even if command is wrong (not always tho)
+    -> sudo docker rm [name of container]
+    # removes containers
+    -> sudo docker start [name of container]
+    -> sudo docker attach [name of container]
+    # starts and puts you into your container in a shell
+    -> sudo docker logs [name of container]
+    # shows PID USER Time and command
+    -dockerhub.com 
+    # can lo10ok for containers and images of shells/VM'shows
+    -> sudo docker -it --rm Ubuntu
+    # removes docker container after exiting
+    -> sudo docker run -it -v /home/instructer/shared:/mnt/shared ubuntu
+    # like a folder share, shres a folder from your own machine to the container
+-------------------------------------------------------
+
+- Annsible Playbooks
+    - we have implimented a jump bock that is running an ansible container
+    - YAML (Yet Antother Markup Language)
+    - YAML used by ansible
+    - indentations show "child" points
+    # like my notes indentations under main subjects
+    - restart and enter the container that we setup last class
+    - once attached do *
+    *commands*
+    -> nano /etc/ansible/pentest.yml
+        >> ---
+        >> - name: Config Web VM with Docker
+        >>   hosts: webservers 
+        >>   become: true
+        >>   tasks:
+        >>    - name: docker.io
+        >>      apt: 
+        >>        update_cache: yes 
+        >>        name:docke.io
+        >>        state: present
+        >>    - name: Install pip
+        >>      apt:
+        >>         name: python3-pip
+        >>         present: yes
+        >>    - name: Install Docker python module
+        >>      pip:
+        >>        name: docker
+        >>        state: present 
+        >>    - name: downlad and launch dvwa container 
+        >>      docker_container:
+        >>        name: dvwa
+        >>        image: cyberxsecurity/dvwa
+        >>        state: started
+        >>        restart_policy: always
+        >>        published_ports: 80:80
+        >>    - name: Enable docker service
+        >>      systemd:
+        >>          name: docker 
+        >>          enabled: yes
+    -> ansible-playbook /etc/ansible/pentest.yml
+    # this will run the playbook we just made in nano
+
+-Load balancing
+    - load balencers do what it sounds like
+    - re-directs specific traffic in order to destribute the load put on a network
+    - Denile of service attack is wher traffic gets redirected into a machine so no one can eter the affected machines
+    - provides an external IP connects to port 80 on our server
+    **demo** on azure
+    1. search for load balancer
+    2. create one
+    3. fResorce group = Red Team
+    4. name Red-Team-LB
+    5. type=public
+    6. create a new IP
+    7. public ip name RedTeam-LB
+    8. - create Health probe
+       - name = RedTeamProbe
+       - port 80 proto= TCP
+    9. add backendpool
+
+- Firewall configurration
+**demo**
+    - on loadbalencers go to the loadbalencer you made
+    - go too load balencing rules and add
+    - called RedTeamLBR
+    - tcp and port 80
+    - session persistence client ip 
+    - everything else is defaults
+    - go too network security group RedTeamSG
+    - inbound security rules and add
+    - source = any
+    - dectination = virtual network
+    - tcp and priority 4002
+    - name DVWA_WEB
+    - Go back to loadbalencer copy ip from the RedTeamLBR
+    
+13.72.87.192 #my load balencer ip machine
+
+--------------------------------------------
+12.4 Homework 06/28/2020
+-VMs Ip's
+    -Jumpbox:52.255.200.116
+        -Subnet:10.0.0.4
+    -web-01:13.72.87.192
+        -Subnet:10.0.0.5
+    -web-02:13.72.87.192
+        -Subnet:10.0.0.8
+    -web-03:40.87.101.87
+        -Subnet:10.0.0.9
+
+
+
+ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDPOy00MfPDhD5lWOK1EUdTscKtLRAGt4s1MslX4ZsGfcFFuok9LcSe2syovtvFafDpc7qKRdc6nDugE5rJSzHwqQgA9vCVzWa55pQzUOe16UqE7MhJ1f3SOHMTvxr52D3SrtuVhRmS9uNbDRaZWSEycgW1fUVtbyUcnxKB2rk1p9uZil9oG2j+yKgfpkC14TQ2TVOARJe0tpiAXjwc7SOsxvVFun1BQv1+522J2mOzzYdlNVsnusK8wemqTNfDB5OB6ffiTuOZsjgnprDS7xG7FEzSdV5Py1qitv1C4yVtr4JVxmtEOQdCz9fOXxmFcJd1baUck+mdrmhpSUKXBE5V root@709ee8890a0b
+
+
+
+
+
