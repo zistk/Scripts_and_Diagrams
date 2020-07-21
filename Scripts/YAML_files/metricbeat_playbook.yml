@@ -1,0 +1,22 @@
+
+
+---
+   - name: Installing Metricbeat
+     hosts: webservers
+     become: yes
+     tasks:
+     - name: Download metricbeat package
+       command: curl -L -o <Link to the virsion of metricbeat you want>
+     - name: Installing Metricbeat package
+       command: dpkg -i metricbeat-7.4.0-amd64.deb
+     - name: Copy over metricbeat configuration
+       copy:
+	src: /etc/ansible/files/metricbeat-config.yml
+	dest: /etc/metricbeat/metricbeat.yml
+	mode: '0644'
+     - name: Enable and Configure system module
+       command: metricbeat modules enable system
+     - name: Setup Metricbeat
+       command: metricbeat setup
+     - name: Start metricbeat service
+       command: service metricbeat start
