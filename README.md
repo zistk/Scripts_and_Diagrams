@@ -119,7 +119,7 @@ suspicious activity. We used filebeat and metricbeat to do so.
 
 ![filebeat_yml](./Scripts/YAML_files/filebeat-playbook.yml)
 
-cbeat_yml](./Scripts/YAML_files/metricbeat_playbook.yml)
+![metricbeat_yml](./Scripts/YAML_files/metricbeat_playbook.yml)
 
 #all of the important ansible configuration files
 
