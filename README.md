@@ -9,7 +9,7 @@ information from different sources such as google and the symantic articles
 we were assigned to read. This gave us a nice start and introduction to the world 
 of infosec. While showing us what was to come.
 
-![symantic hw sheet](./Images/'worksheet one, security 101.dox')
+![symantic hw sheet](./Images/worksheet one, security 101.dox)
 
 Week three we were moving on to the novice level linux commands like "awk" and "sed".
 we dipped our feet in and got a taste of what linux was. By the end of the week
@@ -41,7 +41,7 @@ find six flags that were encypted and held a message for those that collected
 all six. Teaching us diffrent techniques to escalate privilages and access and
 extract data.
 
-![johnripper](./Images/'john the ripper .png')
+![johnripper](./Images/john the ripper .png)
 
 #we used john the ripper during and at the end of the scavenger hunt to Bruteforce
 #the passwords and flags to get results.
@@ -93,7 +93,7 @@ someone that set off an alert; and how to use and setup Firewalld.
 
 ![setting up sevices dropzones](./Images/adding_services.png)
 
-![setting interfaces on zones](./Images/adding_interfacees_to_zones.png)
+![setting interfaces on zones](./Images/adding_interfaces_to_zones.png)
  
 #Me using Firewalld to setup services and interfaces on my zones
 
